@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Map</title>
+    </head>
+    
+    <body>
+        <h1>Grid Map</h1>
+        <br><br>
+        <div id="main">
+            <img class="myButton" id="myImage1" src="image1.png" style="width:50px;height:50px;">
+            <img class="myButton" id="myImage2" src="image1.png" style="width:50px;height:50px;">
+
+            <script>
+                var myButton = document.getElementsByClassName("myButton");
+                var i;
+                for (i = 0; i < myButton.length; i++) {
+                    var imgList = ["image1.png","image2.png", "image3.png"];
+
+                    var ButtonID = document.getElementsByClassName('myButton')[i].id
+                    var myImage = document.getElementById(ButtonID)
+                    myImage.onclick = function( e ){
+                        var elem = e.target,
+                        imageIndex = parseInt(elem.dataset.img,10);
+                        if( imageIndex <= (imgList.length -1) ) {
+                            elem.src = imgList[imageIndex++];
+                            elem.dataset.img = imageIndex;
+                        } else {
+                            elem.src = imgList[0];
+                            elem.dataset.img = 1;
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </body>
+</html>
