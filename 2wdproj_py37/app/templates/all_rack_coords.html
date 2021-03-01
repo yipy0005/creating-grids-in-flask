@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grid Parameters</title>
+</head>
+<body>
+
+<form method=post>
+<h1>All Rack Coordinates</h1>
+
+{% for each_rack in all_racks %}
+<a href="/grid/individual/{{ each_rack }}" target="_blank">{{ each_rack }}</a>
+<br>
+{% endfor %}
+
+</body>
+</html>

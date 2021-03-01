@@ -1,4 +1,4 @@
-def grid_obstacle(length, width):
+def grid_map(length, width):
     with open("app/templates/map.html", "w") as map_file:
 
         all_alphabets = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
