@@ -1,96 +1,33 @@
 
-            <!DOCTYPE html>
-            <html>
-            <head>
-            <title>Map</title>
-            <style>
-            
-            #main {
-                height: 250px;
-                width: 250px;
-                line-height: 0;
-            }
-            
-            </style>
-            </head>
-            <body>
-
-            <h1>Grid Map</h1>
-            <br><br>
-            <div id="main">
-            
-                <img class="myButton" id="A0" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <title>Actual Map</title>
                 
-                <img class="myButton" id="A1" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="A2" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="A3" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="A4" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="B0" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="B1" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="B2" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="B3" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="B4" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="C0" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="C1" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="C2" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="C3" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="C4" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="D0" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="D1" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="D2" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="D3" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="D4" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="E0" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="E1" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="E2" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="E3" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-                <img class="myButton" id="E4" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                
-            <script>
-                var myButton = document.getElementsByClassName("myButton");
-                var i;
-                for (i = 0; i < myButton.length; i++) {
-                    var imgList = ["{{ url_for('static', filename='image1.png') }}","{{ url_for('static', filename='image2.png') }}", "{{ url_for('static', filename='image3.png') }}"];
-
-                    var ButtonID = document.getElementsByClassName('myButton')[i].id
-                    var myImage = document.getElementById(ButtonID)
-                    myImage.onclick = function( e ){
-                        var elem = e.target,
-                        imageIndex = parseInt(elem.dataset.img,10);
-                        if( imageIndex <= (imgList.length -1) ) {
-                            elem.src = imgList[imageIndex++];
-                            elem.dataset.img = imageIndex;
-                        } else {
-                            elem.src = imgList[0];
-                            elem.dataset.img = 1;
-                        }
-                    }
+                <style>
+                #main {
+                    height: 650px;
+                    width: 350px;
+                    line-height: 0;
                 }
-            </script>
-            </div>
-            </body>
-            </html>
-            
+                </style>
+                
+                </head>
+                <body>
+
+                <h1>Actual Map</h1>
+                <br><br>
+                <div id="main">
+                
+                {% for coord in all_possible_coordinates %}
+                    {% if coord in racks_coords %}
+                        <img src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                    {% endif %}
+                {% endfor %}
+                
+                </div>
+                </body>
+                </html>
+                

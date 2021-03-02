@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Grid Parameters</title>
-</head>
-<body>
 
-<form method=post>
-<h1>All Rack Coordinates</h1>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <title>General Map</title>
+                
+                </head>
+                <body>
 
-{% for each_rack in all_racks %}
-<a href="/grid/individual/{{ each_rack }}" target="_blank">{{ each_rack }}</a>
-<br>
-{% endfor %}
-
-</body>
-</html>
+                <h1>General Map</h1>
+                <br><br>
+                <table>
+                {% for x in range(2) %}<tr>    {% for y in range(2) %}        {% for i in range(rack_no|length) %}            {% if rack_no[i]['rack_coords'][0] == x and rack_no[i]['rack_coords'][1] == y %}
+                                <td>
+                                    <a href="/grid/individual/{{ rack_no[i]['rack_id'] }}" target="_blank">{{ rack_no[i]['rack_id'] }}</a>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                
