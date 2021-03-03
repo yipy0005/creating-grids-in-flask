@@ -1,10 +1,10 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return redirect("/grid/overall")
 
 from app.grid_map.views import gridmap as mod_gridmap
 

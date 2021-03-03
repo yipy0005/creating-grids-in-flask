@@ -8,6 +8,9 @@
                 <body>
 
                 <h1>General Map</h1>
+                <br>
+                <h3>Please edit the height and width of each rack to generate the largest possible warehouse area.</h3>
+                <h3>Once done, click <a href="/grid/mapping" target="_blank">here</a> for the warehouse map</h3>
                 <br><br>
                 <table>
                 {% for x in range(2) %}<tr>    {% for y in range(2) %}        {% for i in range(rack_no|length) %}            {% if rack_no[i]['rack_coords'][0] == x and rack_no[i]['rack_coords'][1] == y %}

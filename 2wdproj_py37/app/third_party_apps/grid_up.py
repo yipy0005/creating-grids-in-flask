@@ -53,6 +53,9 @@ def grid_map(rows, cols, total_racks, rack_specific_details=0):
                 <body>
 
                 <h1>General Map</h1>
+                <br>
+                <h3>Please edit the height and width of each rack to generate the largest possible warehouse area.</h3>
+                <h3>Once done, click <a href="/grid/mapping" target="_blank">here</a> for the warehouse map.</h3>
                 <br><br>
                 <table>
                 """
