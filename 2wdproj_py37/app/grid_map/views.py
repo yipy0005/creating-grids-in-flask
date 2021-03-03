@@ -152,7 +152,7 @@ def mapping():
     grid_map(
         total_required_rows,
         total_required_cols,
-        total_racks_in_a_row*total_racks_in_a_col,
+        len(all_possible_coordinates),
         1
     )
 
