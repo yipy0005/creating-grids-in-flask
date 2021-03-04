@@ -7,8 +7,8 @@
                 
                 <style>
                 #main {
-                    height: 150px;
-                    width: 150px;
+                    height: 1650px;
+                    width: 1000px;
                     line-height: 0;
                 }
                 </style>
@@ -26,24 +26,14 @@
                 <br><br>
                 <div id="main">
                 
-                    <img class="myButton" id="0" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="1" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="2" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="3" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="4" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="5" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="6" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="7" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
-                    <img class="myButton" id="8" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    
+                {% for each_coords in all_possible_coordinates %}
+                    {% if each_coords in racks_coords %}
+                        <img src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                    {% endif %}
+                {% endfor %}
+                
                 </div>
                 <script>
                     document.querySelector('button').addEventListener('click', function() {

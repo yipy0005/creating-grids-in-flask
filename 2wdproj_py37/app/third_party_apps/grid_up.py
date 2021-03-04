@@ -126,12 +126,24 @@ def grid_map(rows, cols, total_racks, rack_specific_details=0):
                 """
             )
 
-            for i in range(total_racks):
-                map_file.write(
-                    """
-                    <img class="myButton" id="%i" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    """ % i
-                )
+            # for i in range(total_racks):
+            #     map_file.write(
+            #         """
+            #         <img class="myButton" id="%i" src="{# {{ url_for('static', filename='image1.png') }} #}" style="width:50px;height:50px;float:left;">
+            #         """ % i
+            #     )
+
+            map_file.write(
+                """
+                {% for each_coords in all_possible_coordinates %}
+                    {% if each_coords in racks_coords %}
+                        <img src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                    {% endif %}
+                {% endfor %}
+                """
+            )
 
             map_file.write(
                 """
