@@ -182,7 +182,7 @@ def mapping():
     )
 
     for i in range(len(rack['rack_info'])):
-        if rack['rack_info'][i]['rack_coords'][0] ## To be continued
+        if rack['rack_info'][i]['rack_coords'][0] ## Qn: How to check for matrices in all 4 directions
 
     # total_required_rows = []
     # total_racks_in_a_row = []
