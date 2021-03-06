@@ -7,9 +7,15 @@
                 
                 <style>
                 #main {
-                    height: 1650px;
-                    width: 1000px;
+                    height: 950px;
+                    width: 950px;
                     line-height: 0;
+                }
+
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    text-align: center;
                 }
                 </style>
                 
@@ -19,19 +25,33 @@
                 <h1>Actual Map</h1>
                 <br><br>
 
+                
+
                 <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
                 <button type="button" onclick="doCapture();">Save Map as PNG</button>
                 <br><br>
+                <table>
+                    <tr>
+                        {% for i in range(19) %}
+                        <td style="width:46.1px">{{ i }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                
                 <div id="main">
                 
-                {% for each_coords in all_possible_coordinates %}
-                    {% if each_coords in racks_coords %}
-                        <img src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
-                    {% else %}
-                        <img src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                    {% endif %}
+                {% for each_row in map_matrix %}
+                    {% for each_col in each_row %}
+                        {% if each_col == 0 %}
+                            <img id="{{ each_row }}_{{ each_col }}" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                        {% elif each_col == 1 %}
+                            <img id="{{ each_row }}_{{ each_col }}" src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
+                        {% else %}
+                            <img id="{{ each_row }}_{{ each_col }}" src="{{ url_for('static', filename='image3.png') }}" style="width:50px;height:50px;float:left;">
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
                 
                 </div>

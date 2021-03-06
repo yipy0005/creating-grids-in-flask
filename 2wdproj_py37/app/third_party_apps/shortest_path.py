@@ -34,18 +34,18 @@ def simulate_travel_path(G, visit):
 # My array of nodes, columns A, B, C are present for now
 warehouse_col = [
     'A',
-    # 'B',
-    'C', 'D',
+    'B',
+    'C', # 'D',
     # 'E',
-    'F', 'G',
+    # 'F', 'G',
     # 'H',
-    'I', 'J',
+    # 'I', 'J',
     # 'K',
-    'L', 'M',
+    # 'L', 'M',
     # 'N',
-    'O', 'P',
+    # 'O', 'P',
     # 'Q',
-    'R'
+    # 'R'
 ]
 warehouse_edges = []
 warehouse_endpoint_edges = []
@@ -54,7 +54,7 @@ myArray = np.array(['Start'])
 # Automatically adding the nodes A0 to C0,
 for col in warehouse_col:
     # Number of rows in each warehouse column
-    for num in range(0, 14):
+    for num in range(0, 11):
         location = col + str(num)
         if num == 0:
             # Linking the start position to starting point of each warehouse
@@ -68,7 +68,7 @@ for col in warehouse_col:
             # Linking each node in each column to each other E.g. A0 -> A1, A1
             # -> A2
             warehouse_edges.append([myArray[array_length-2], location])
-        if num == 13:
+        if num == 10:
             warehouse_endpoint_edges.append(location)
 
 for nodes in myArray:
@@ -112,7 +112,7 @@ myGraph.add_weighted_edges_from(warehouse_edges)
 # So now add nodes are interconnected
 # We only want to go to a few particular nodes so..
 # Under the assumption there will always be a custom point of 'Start'
-travel_log = ['Start', 'C8', 'C4', 'A5', 'B3', 'B4', 'A2', 'A4']
+travel_log = ['Start', 'C8', 'C4', 'B3', 'A5', 'B4', 'A2', 'A4']
 
 # uh = simulate_edges_add_tsp(myGraph)
 travel_Graph = simulate_travel_path(myGraph, travel_log)

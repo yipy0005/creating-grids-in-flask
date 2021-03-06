@@ -11,6 +11,7 @@ gridmap = Blueprint(
     url_prefix='/grid',
 )
 
+
 @gridmap.route('/overall', methods=['GET', 'POST'])
 def overall_racking():
     # all_alphabets = [
@@ -46,7 +47,9 @@ def overall_racking():
 
         all_rack_coords = {}
         for i in range(int(form.total_no_of_racks.data)):
-            all_rack_coords['rack_'+str(i)] = (np.argwhere(overall_rack_arrangement == i))
+            all_rack_coords['rack_'+str(i)] = (
+                np.argwhere(overall_rack_arrangement == i)
+            )
 
         # all_rack_coords = []
         # for y in range(no_of_cols):
@@ -152,37 +155,64 @@ def individual_racking(rackid):
 @gridmap.route('/mapping', methods=['GET', 'POST'])
 def mapping():
 
-    with open('racks_infos.txt', 'r') as json_file:
-        rack = json.load(json_file)
+    # def pad_with(vector, pad_width, iaxis, kwargs):
+    #     pad_value = kwargs.get('padder', 10)
+    #     vector[:pad_width[0]] = pad_value
+    #     vector[-pad_width[1]:] = pad_value
 
-    all_racks = {}
-    for each_rack in rack['rack_info']:
-        all_racks[each_rack['rack_id']] = np.array(
-            each_rack['rack_individual_coords']
-        )
+    map_matrix = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 2, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 2],
+            [0, 2, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 2, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 2, 1, 0, 1],
+            [0, 2, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 2, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 2, 1, 0, 1, 1, 0, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ]
 
-    total_racks = int(rack['rack_info'][-1]['rack_id'][-1])+1
-    no_of_rows = []
-    no_of_cols = []
-    for each_rack in rack['rack_info']:
-        no_of_rows.append(each_rack['rack_coords'][0])
-        no_of_cols.append(each_rack['rack_coords'][1])
-    no_of_rows = max(no_of_rows)
-    no_of_cols = max(no_of_cols)
+    # with open('racks_infos.txt', 'r') as json_file:
+    #     rack = json.load(json_file)
 
-    overall_rack_arrangement = np.arange(
-        total_racks
-    )
+    # all_racks = {}
+    # for each_rack in rack['rack_info']:
+    #     all_racks[each_rack['rack_id']] = np.array(
+    #         each_rack['rack_individual_coords']
+    #     )
 
-    overall_rack_arrangement = overall_rack_arrangement.reshape(
-        (
-            no_of_rows,
-            no_of_cols
-        )
-    )
+    # total_racks = int(rack['rack_info'][-1]['rack_id'][-1])+1
+    # no_of_rows = []
+    # no_of_cols = []
+    # for each_rack in rack['rack_info']:
+    #     no_of_rows.append(each_rack['rack_coords'][0])
+    #     no_of_cols.append(each_rack['rack_coords'][1])
+    # no_of_rows = max(no_of_rows)
+    # no_of_cols = max(no_of_cols)
 
-    for i in range(len(rack['rack_info'])):
-        if rack['rack_info'][i]['rack_coords'][0] ## Qn: How to check for matrices in all 4 directions
+    # overall_rack_arrangement = np.arange(
+    #     total_racks
+    # )
+
+    # overall_rack_arrangement = overall_rack_arrangement.reshape(
+    #     (
+    #         no_of_rows,
+    #         no_of_cols
+    #     )
+    # )
+
+    # for i in range(len(rack['rack_info'])):
+    #     if rack['rack_info'][i]['rack_coords'][0] ## Qn: How to check for matrices in all 4 directions
 
     # total_required_rows = []
     # total_racks_in_a_row = []
@@ -230,8 +260,11 @@ def mapping():
     #     1
     # )
 
+    grid_map(map_matrix, 1)
+
     return render_template(
         'map.html',
+        map_matrix=map_matrix
         # all_possible_coordinates=all_possible_coordinates,
         # racks_coords=racks_coords
     )
