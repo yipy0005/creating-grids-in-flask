@@ -5,28 +5,6 @@ def grid_map(map_matrix, rack_specific_details=0):
 
         with open("app/templates/all_rack_coords.html", "w") as map_file:
 
-            # all_alphabets = [
-            #     'A', 'B', 'C', 'D', 'E', 'F', 'G',
-            #     'H', 'I', 'J', 'K', 'L', 'M', 'N',
-            #     'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-            #     'V', 'W', 'X', 'Y', 'Z'
-            # ]
-            # all_numbers = [i for i in range(26)]
-
-            # alphabets = []
-            # numbers = []
-            # for i in range(length):
-            #     numbers.append(all_numbers[i])
-            # for i in range(width):
-            #     alphabets.append(all_alphabets[i])
-
-            # coordinate_system = []
-            # for alphabet in alphabets:
-            #     for number in numbers:
-            #         coordinate_system.append(alphabet + str(number))
-
-            # print(coordinate_system)
-
             map_file.write(
                 """
                 <!DOCTYPE html>
@@ -80,10 +58,6 @@ def grid_map(map_matrix, rack_specific_details=0):
                 """
             )
 
-    # else:
-    #     with open("app/templates/all_rack_coords.html", "w") as map_file:
-    #         map_file.write('')
-
     elif rack_specific_details == 1:
 
         with open("app/templates/map.html", "w") as map_file:
@@ -102,8 +76,8 @@ def grid_map(map_matrix, rack_specific_details=0):
                 """
                 <style>
                 #main {
-                    height: 950px;
-                    width: 950px;
+                    height: 750px;
+                    width: 1000px;
                     line-height: 0;
                 }
 
@@ -124,22 +98,34 @@ def grid_map(map_matrix, rack_specific_details=0):
                 <h1>Actual Map</h1>
                 <br><br>
 
-                
-
                 <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
                 <button type="button" onclick="doCapture();">Save Map as PNG</button>
                 <br><br>
-                <table>
-                    <tr>
-                        {% for i in range(19) %}
-                        <td style="width:46.1px">{{ i }}</td>
-                        {% endfor %}
-                    </tr>
-                </table>
-                
+
                 <div id="main">
+
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_A" src="{{ url_for('static', filename='alphabets/A.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_B" src="{{ url_for('static', filename='alphabets/B.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_C" src="{{ url_for('static', filename='alphabets/C.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_D" src="{{ url_for('static', filename='alphabets/D.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_E" src="{{ url_for('static', filename='alphabets/E.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_F" src="{{ url_for('static', filename='alphabets/F.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_G" src="{{ url_for('static', filename='alphabets/G.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_H" src="{{ url_for('static', filename='alphabets/H.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_I" src="{{ url_for('static', filename='alphabets/I.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_J" src="{{ url_for('static', filename='alphabets/J.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_K" src="{{ url_for('static', filename='alphabets/K.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="blank_grid" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                <img id="grid_L" src="{{ url_for('static', filename='alphabets/L.png') }}" style="width:50px;height:50px;float:left;">
                 """
             )
 
@@ -152,14 +138,14 @@ def grid_map(map_matrix, rack_specific_details=0):
 
             map_file.write(
                 """
-                {% for each_row in map_matrix %}
-                    {% for each_col in each_row %}
+                {% for i in range(map_matrix|length) %}
+                    {% for each_col in map_matrix[i] %}
                         {% if each_col == 0 %}
-                            <img id="{{ each_row }}_{{ each_col }}" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
-                        {% elif each_col == 1 %}
-                            <img id="{{ each_row }}_{{ each_col }}" src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
+                            <img id="{{ each_col }}_{{ i }}" src="{{ url_for('static', filename='image1.png') }}" style="width:50px;height:50px;float:left;">
+                        {% elif each_col == 3 %}
+                            <img id="{{ each_col }}_{{ i }}" src="{{ url_for('static', filename='Depot.png') }}" style="width:50px;height:50px;float:left;">
                         {% else %}
-                            <img id="{{ each_row }}_{{ each_col }}" src="{{ url_for('static', filename='image3.png') }}" style="width:50px;height:50px;float:left;">
+                            <img id="{{ each_col }}_{{ i }}" src="{{ url_for('static', filename='image2.png') }}" style="width:50px;height:50px;float:left;">
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
@@ -183,14 +169,6 @@ def grid_map(map_matrix, rack_specific_details=0):
                 </html>
                 """
             )
-
-        # # 1D Matrix
-        # for coordinates in coordinate_system:
-        #     map_file.write(
-        #         """
-        #         <img class="myButton" id="%s" src="{# {{ url_for('static', filename='image1.png') }} #}" style="width:50px;height:50px;float:left;">
-        #         """ % coordinates
-        #     )
 
             map_file.write(
                 """

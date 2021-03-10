@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/yewmun.yip/opt/anaconda3/envs/2wdproj_py38/bin/python",
+    "python.pythonPath": "/Users/yipyewmun/anaconda3/envs/2wdproj_py38/bin/python",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true
