@@ -24,7 +24,8 @@ def simulate_travel_path(G, visit):
             try:
                 if not temp_Graph.has_edge(c[n], c[n1]):
                     # print(c[n], c[n1])
-                    cool_dist = list(nx.dijkstra_path(G, c[n], c[n1])) # Shortest path between c[n] & c[n1] using Dijkstra's Algo
+                    # Shortest path between c[n] & c[n1] using Dijkstra's Algo
+                    cool_dist = list(nx.dijkstra_path(G, c[n], c[n1]))
                     # print(cool_dist)
                     total_weight = path_cost(G, cool_dist)
                     # print(total_weight)
@@ -164,7 +165,7 @@ travel_log = [
 
 # uh = simulate_edges_add_tsp(myGraph)
 # Nodes in travel_log are points one wishes to travel to.
-# Using simulate_travel_path, the weights are 
+# Using simulate_travel_path, the weights are
 travel_Graph = simulate_travel_path(myGraph, travel_log)
 # print(travel_Graph.edges(), sep='\n')
 
@@ -181,3 +182,4 @@ for n in range(len(permutation)):
 
 print("\nThis is the shortest path to take: ")
 print(the_way)
+print('\nDistance:', distance, '\n')
